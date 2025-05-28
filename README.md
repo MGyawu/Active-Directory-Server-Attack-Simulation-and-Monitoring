@@ -3,6 +3,7 @@
 #### Goals
 #### Skills Used/Learned
 #### Diagram
+![Diagram](ADProject.png)
 ## Configuration
 ## Collecting Telemetry
 ## Performing Attacks

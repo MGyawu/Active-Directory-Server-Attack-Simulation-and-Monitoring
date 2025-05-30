@@ -24,14 +24,14 @@ Note: All of the virtual machines used in this project was made using Virtualbox
 <p>Storage</p>
 <p>Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)</p>
 <p>Splunk Universal Forwarder</p>
-##
+
 
 ### Splunk Server (ADsplunk)
 <p>OS:</p>
 <p>Splunk</p>
 <p>Memory</p>
 <p>Storage</p>
-##
+
 
 ### Target PC (ADdemo)
 <p>OS: [Windows 10](https://www.microsoft.com/en-us/software-download/windows10)</p>
@@ -39,7 +39,7 @@ Note: All of the virtual machines used in this project was made using Virtualbox
 <p>Storage: 50gbs</p>
 <p>Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)</p>
 <p>Splunk Universal Forwarder</p>
-##
+
 
 
 ### Attacking PC (Kali-linux VM)

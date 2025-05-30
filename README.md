@@ -18,11 +18,32 @@ those attacks through logs sent to a Splunk server.
 Note: All of the virtual machines used in this project was made using Virtualbox as a hypervisor
 
 ### Active Directory Server (ADserver)
+OS:
+Splunk
+Memory
+Storage
+Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+Splunk Universal Forwarder
+
 ### Splunk Server (ADsplunk)
+OS:
+Splunk
+Memory
+Storage
+
 ### Target PC (ADdemo)
 OS: [Windows 10](https://www.microsoft.com/en-us/software-download/windows10)
+Memory: 6gbs (6114 mbs)
+Storage: 50gbs
+Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+Splunk Universal Forwarder
+
 
 ### Attacking PC (Kali-linux VM)
+OS:
+Memory: 2gbs (2048 mbs)
+Storage: 
+
 
 
 ## Collecting Telemetry

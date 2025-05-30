@@ -15,7 +15,7 @@ those attacks through logs sent to a Splunk server.
 
 ## Configurations
 
-#### Note: All of the virtual machines used in this project was made using Virtualbox as a hypervisor
+Note: All of the virtual machines used in this project was made using Virtualbox as a hypervisor
 
 ### Active Directory Server (ADserver)
 ### Splunk Server (ADsplunk)

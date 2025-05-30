@@ -20,6 +20,8 @@ Note: All of the virtual machines used in this project was made using Virtualbox
 ### Active Directory Server (ADserver)
 ### Splunk Server (ADsplunk)
 ### Target PC (ADdemo)
+OS: [Windows 10](https://www.microsoft.com/en-us/software-download/windows10)
+
 ### Attacking PC (Kali-linux VM)
 
 

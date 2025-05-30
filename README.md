@@ -22,7 +22,7 @@ Note: All of the virtual machines used in this project was made using Virtualbox
 <p>Splunk</p>
 <p>Memory</p>
 <p>Storage</p>
-<p>Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)</p>
+<p>Sysmon: ![Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)</p>
 <p>Splunk Universal Forwarder</p>
 
 
@@ -34,10 +34,10 @@ Note: All of the virtual machines used in this project was made using Virtualbox
 
 
 ### Target PC (ADdemo)
-<p>OS: [Windows 10](https://www.microsoft.com/en-us/software-download/windows10)</p>
+<p>OS: ![Windows 10](https://www.microsoft.com/en-us/software-download/windows10)</p>
 <p>Memory: 6gbs (6114 mbs)</p>
 <p>Storage: 50gbs</p>
-<p>Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)</p>
+<p>Sysmon: ![Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)</p>
 <p>Splunk Universal Forwarder</p>
 
 

@@ -23,12 +23,12 @@ Note: All of the virtual machines used in this project was made using Virtualbox
 <p>Memory</p>
 <p>Storage</p>
 <p>Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) </p>
-<p>Splunk Universal Forwarder</p>
+<p>[Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)</p>
 
 
 ### Splunk Server (ADsplunk)
 <p>OS:</p>
-<p>Splunk</p>
+<p>Splunk: [Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html)</p>
 <p>Memory</p>
 <p>Storage</p>
 
@@ -38,7 +38,7 @@ Note: All of the virtual machines used in this project was made using Virtualbox
 <p>Memory: 6gbs (6114 mbs)</p>
 <p>Storage: 50gbs</p>
 <p>Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) </p>
-<p>Splunk Universal Forwarder</p>
+<p>[Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)</p>
 
 
 
@@ -46,7 +46,6 @@ Note: All of the virtual machines used in this project was made using Virtualbox
 <p>OS:</p>
 <p>Memory: 2gbs (2048 mbs)</p>
 <p>Storage: </p>
-##
 
 
 

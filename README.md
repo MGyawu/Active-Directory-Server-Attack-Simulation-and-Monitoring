@@ -1,6 +1,5 @@
 # Active-Directory-Brute-Force-Attack-Simulation-and-Monitoring
 ## Introduction
-#### Overview
 
 At the center of this project is a virtual environment meant to represent a real-world network
 through a collection of virtual machines. Users and permissions are provided within an Active
@@ -14,6 +13,16 @@ The purpose of this project is to create users are created within the Active Dir
 the kali linux VM attacks and gains access to those user accounts, and to identify and observe
 those attacks through logs sent to a Splunk server. 
 
-## Configuration
+## Configurations
+
+#### Note: All of the virtual machines used in this project was made using Virtualbox as a 
+#### hypervisor
+
+### Active Directory Server (ADserver)
+### Splunk Server (ADsplunk)
+### Target PC (ADdemo)
+### Attacking PC (Kali-linux VM)
+
+
 ## Collecting Telemetry
 ## Performing Attacks

@@ -9,20 +9,27 @@ environment is illustrated in the diagram below:
 
 ![Diagram](ADProject.png)
 
-The purpose of this project is to create users are created within the Active Directory server,
-the kali linux VM attacks and gains access to those user accounts, and to identify and observe
-those attacks through logs sent to a Splunk server. 
+The purpose of this project is to create users are created within the Active Directory server, the kali linux VM attacks and gains access to those user accounts, and to identify and observe those attacks through logs sent to a Splunk server. 
 
 Note: All of the virtual machines used in this project was made using Virtualbox as a hypervisor
 
 
 ## 1. Splunk Server (ADsplunk) Configurations
+
+In order to collect logs of and monitor our simulated attack, we need to configure an instance of a an SIEM (secure information event manager) within a system that ingests logs from other devices within this network. Here, we will be configure an Ubuntu based Splunk server. Here are the links from where I acquired the Ubuntu OS and Splunk enterprise for this server:
+
 OS: [Ubuntu 20.04 LTS](https://ubuntu.com/download/server)</p>
 Splunk: [Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html)</p>
 Memory: 8 gbs (8192 mbs)</p>
 Storage: 100 gbs</p>
 
-![Splunk server video]()
+After the initial setup my initial setup of my ubuntu server, I needed to give the server the static IP address that I specified in the diagram above. In order to do that, I entered this command into the Ubuntu terminal:
+
+```
+sudo nano /etc/netplan/50-cloud-init.yaml
+```
+
+![Splunk server static IP]()
 
 ## 2. Network Configuration in VirtualBox
 It was important for this project to ensure that each virtual machine is on the name network and have internet access. In the virtualbox menu navigate from Tools > Network > NAT Network > select create. From here give the new network a name, I chose AD-network, give the IPV4 Prefix a value of 192.168.10.0/24, and finally select apply.
@@ -31,6 +38,7 @@ It was important for this project to ensure that each virtual machine is on the 
 
 Now for each virtual machine, select settings > Network. Set "Attached to: " to "NAT Network" and then set "Name" to the network that you have chosen. Finally click "OK."
 
+![Nat Network for each VM](AD-NatNewtorkSelectionForEachMachine.png)
 
 ###
 

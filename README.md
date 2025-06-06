@@ -28,8 +28,20 @@ After the initial setup my initial setup of my ubuntu server, I needed to give t
 ```
 sudo nano /etc/netplan/50-cloud-init.yaml
 ```
+Now that the file "50-cloud-init.yaml" is open, fill its contents with the following:
 
-![Splunk server static IP]()
+![Splunk server static IP](AD-splunkserverStaticIP1.png)
+
+In order for the changes to this file to persist after a reboot, enter this command:
+
+```
+sudo nano /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+```
+
+Now that "99-disable-network-config.cfg" is open, fill its contents with the following:
+
+![Splunk server static IP pt2]()
+
 
 ## 2. Network Configuration in VirtualBox
 It was important for this project to ensure that each virtual machine is on the name network and have internet access. In the virtualbox menu navigate from Tools > Network > NAT Network > select create. From here give the new network a name, I chose AD-network, give the IPV4 Prefix a value of 192.168.10.0/24, and finally select apply.

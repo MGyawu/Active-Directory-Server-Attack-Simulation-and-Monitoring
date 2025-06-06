@@ -15,13 +15,19 @@ those attacks through logs sent to a Splunk server.
 
 Note: All of the virtual machines used in this project was made using Virtualbox as a hypervisor
 
-## Splunk Server (ADsplunk) Configurations
+
+## 1. Splunk Server (ADsplunk) Configurations
 OS: [Ubuntu 20.04 LTS](https://ubuntu.com/download/server)</p>
 Splunk: [Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html)</p>
 Memory: 8 gbs (8192 mbs)</p>
 Storage: 100 gbs</p>
 
 ![Splunk server video]()
+
+## 2. Network Configuration in VirtualBox
+It was important for this project to ensure that each virtual machine is on the name network and have internet access. In the virtualbox menu navigate from Tools > Network > NAT Network > select create. From here give the new network a name, give the IPV4 Prefix a value of 192.168.10.0/24, and finally select apply.
+
+![AD Nat Network Config]()
 
 ###
 

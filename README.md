@@ -25,9 +25,12 @@ Storage: 100 gbs</p>
 ![Splunk server video]()
 
 ## 2. Network Configuration in VirtualBox
-It was important for this project to ensure that each virtual machine is on the name network and have internet access. In the virtualbox menu navigate from Tools > Network > NAT Network > select create. From here give the new network a name, give the IPV4 Prefix a value of 192.168.10.0/24, and finally select apply.
+It was important for this project to ensure that each virtual machine is on the name network and have internet access. In the virtualbox menu navigate from Tools > Network > NAT Network > select create. From here give the new network a name, I chose AD-network, give the IPV4 Prefix a value of 192.168.10.0/24, and finally select apply.
 
-![AD Nat Network Config]()
+![AD Nat Network Config](AD-NatNetworkimage.png)
+
+Now for each virtual machine, select settings > Network. Set "Attached to: " to "NAT Network" and then set "Name" to the network that you have chosen. Finally click "OK."
+
 
 ###
 

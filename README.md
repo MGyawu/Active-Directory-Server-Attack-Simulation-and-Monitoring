@@ -13,15 +13,17 @@ The purpose of this project is to create users are created within the Active Dir
 the kali linux VM attacks and gains access to those user accounts, and to identify and observe
 those attacks through logs sent to a Splunk server. 
 
-## Configurations
-
 Note: All of the virtual machines used in this project was made using Virtualbox as a hypervisor
 
-### Splunk Server (ADsplunk)
+## Splunk Server (ADsplunk) Configurations
 OS: [Ubuntu 20.04 LTS](https://ubuntu.com/download/server)</p>
 Splunk: [Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html)</p>
 Memory: 8 gbs (8192 mbs)</p>
 Storage: 100 gbs</p>
+
+![Splunk server video]()
+
+###
 
 ### Active Directory Server (ADserver)
 OS: [Windows Server 2022](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022)</p>

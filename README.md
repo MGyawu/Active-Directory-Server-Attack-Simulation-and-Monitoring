@@ -92,7 +92,7 @@ sudo apt-get install virtualbox-guest-additions-iso
 ```
 I then typed "y" when prompted and hit "enter" and "enter" again once the the purple screen and menu appears. Now at the top of the server window (virtualbox menu at the top), use the mouse to navigate from Devices > Shared Folders > Shared Folder Settings. Now select the add folder button on the right side of the window. Under "Folder Path" search for and chose the path underwhich you stored the Splunk Enterprise download. Next provide a name for "Folder Name", I chose "Splunk", and check all of the boxes underneath.
 
-![Add Splunk Folder]()
+![Add Splunk Folder](AD-splunkaddfolder.png)
 
 Click "OK" twice and return to the server. Now reboot the virtual machine. This can be done by typing:
 
@@ -118,7 +118,7 @@ sudo mount -t vboxsf -o uid=1000,gid=1000 Splunk share/
 ```
 I then changed directions into the share folder. You can see it in the share folder here:
 
-![Splunk Mounted]()
+![Splunk Mounted](AD-splunkmounted.png)
 
 To perform my splunk install I entered this command:
 

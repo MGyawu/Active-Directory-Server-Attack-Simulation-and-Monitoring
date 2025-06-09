@@ -141,6 +141,12 @@ cd bin
 sudo ./splunk enable boot-start -user splunk
 ```
 
+## 3. Target PC (AD-demo) and Active Directory Server (AD-server) Configurations: Static IP addresses, Splunk Universal Forwarder, and Sysmon
+
+## 4. Active Directory Server (AD-server) Configurations: Active Directory and Creating Users and Groups
+
+## 5. Attack Simulation and Monitoring
+
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## 1. Splunk Server (AD-splunk) Configurations and Splunk Installation
 

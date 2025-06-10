@@ -143,9 +143,21 @@ sudo ./splunk enable boot-start -user splunk
 
 ## 3. Target PC (AD-demo) and Active Directory Server (AD-server) Configurations: Static IP addresses, Splunk Universal Forwarder, and Sysmon
 
+Before installing these components I made sure to the change the name of AD-demo to "target-PC" and AD-server to "ADserver" from the windows menu, this way these are the names of the hosts that appear in the Splunk logs. This can be done by Navigating Windows menu > Type PC and select properties (in the windows server you may have to right click PC to get this option) > select "Rename PC". I then entered the new name and restarted these machines once prompted.
+
+Now, in order to give these devices their static IP addresses I navigated to the the network icon and right clicked it > Open Network & Internet Settings > Change Adapter Options > Right Click the Adapter and select properties > doublie click Internet Protocol Version 4 (TCP/IPv4) > Select "Use the following IP address" and "Use the following DNS server address". I then entred these values:</p>
+
+Target-PC:
+![AD-demoStaticIP]()</p>
+
+AD-server:
+![AD-serverStaticIP]()</p>
+
 ## 4. Active Directory Server (AD-server) Configurations: Active Directory and Creating Users and Groups
 
-## 5. Attack Simulation and Monitoring
+## 5. Target PC (AD-demo) Configuration: Installing AtomicRedTeam
+
+## Attack Simulation and Monitoring
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## 1. Splunk Server (AD-splunk) Configurations and Splunk Installation

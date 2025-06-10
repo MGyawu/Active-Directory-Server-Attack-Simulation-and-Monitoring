@@ -28,6 +28,7 @@ OS: [Windows Server 2022](https://www.microsoft.com/en-us/evalcenter/evaluate-wi
 Memory: 4 gbs(4096 mbs)</p>
 Storage: 50 gbs</p>
 Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) </p>
+Sysmon Configuration: [olafhartong Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)</p>
 [Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)</p>
 
 ### Target PC (ADdemo)
@@ -35,6 +36,7 @@ OS:  [Windows 10](https://www.microsoft.com/en-us/software-download/windows10)</
 Memory: 6 gbs (6114 mbs)</p>
 Storage: 50 gbs</p>
 Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)</p>
+Sysmon Configuration: [olafhartong Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)</p>
 [Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)</p>
 
 ### Attacking PC (Pre-built Kali-linux VM)
@@ -151,7 +153,46 @@ Now, in order to give these devices their static IP addresses I navigated to the
 |---------|---------|
 |![AD-demoStaticIP](AD-demoStaticIP.png)|![AD-serverStaticIP](AD-serverStaticIP.png)|
 
-Next I installed Splunk Universal Forwarder. The link I showed above is the link to the Splunk Universal Forwarder installer, and I installed this from within my Target-PC and AD-server.
+Next I installed Splunk Universal Forwarder. The link I showed above is the link to the Splunk Universal Forwarder installer, and I downloaded the installer from a web browser within my Target-PC and AD-server. Once the download was completed, I ran the installer, checked off the box that stated "Check this box to accept the License Agreement", selected "An on-premises Splunk Enterprise instance", and then selected "Next".
+
+![AD-DemoAndServerSplunkForwarder1]()
+
+On the next page, I entered "admin" as the user name then selected "Next" twice, skipping over the Deployment Server as I did not have one. Under the Receiving Indexer, I entered the Splunk Server IP address under "Hostname of IP", which is 192.168.10.10, and for the default port I entered 9997.
+
+![AD-DemoAndServerSplunkForwarder2]()
+
+Following this, I navigated Next > Install. With this install continuing in the background, I then went on to download Sysmon and retrieve olafhartong's Sysmon configuration, links for the webpages for both above. From olafhartong's page I selected "Raw", and, once the new page loaded, I right clicked > clicked "Save as" > saved into Downloads.
+
+![AD-DemoAndServerSysmonConfig]()
+
+From this point I extracted the orginal downloaded Sysmon zip file > copied the file path > ran Powershell as Administrator and entered this command
+```
+cd [File path of Sysmon]
+.\Sysmon64.exe -i ..\sysmonconfig.xml
+```
+
+This is how mine looked:
+
+![AD-DemoAndServerDownloadSysmon1]()
+
+After running this command a pop-up titled "System Monitor License Agreement" with info titled "SYSINTERNALS SOFTWARE LICENSE TERMS" appeared. Once I clicked agree, Sysmon will now download onto your system and begin.
+
+![AD-DemoAndServerDownloadSysmon2]()
+
+Once I saw the message "Sysmon64 started", I know the download was complete. By this point the Splunk Universal Forwarder also finished its installation, and with that, I opened the file explorer and navigated down this path: This PC > Local Disk (C:) > Program Files > SplunkUniversalForwarder > etc > system > local. From here I ran Notepad as administrator and created the file "inputs.conf" that contains this:
+
+![AD-DemoAndServerInputs]()
+
+This is vital for instructing the Splunk forwarder on what to send to the Splunk server. This specifially instructs the forwarder to forward information related to application, security, system, and sysmon to the Splunk server. Also, the index named "endpoint" specified in this file will need a corresponding index named endpoint created in order to receive these events. I create that later when I access Splunk enterprise. </p>
+
+Due to the fact that I created this "inputs.conf" file, I then followed that up by restarting the Splunk Forwarder Service. This action is necessary whenever inputs.conf is updated or changed. In order to do so, from the windows search bar at the bottom left I searched for the Services application > right clicked and chose Run as Administrator > Found "SplunkForwarder" among the list of applications and double clicked it > navigated to Log On > selected "Local System account" > click Apply and OK > Right click SplunkForwarder in services > select Restart.
+
+|![AD-DemoAndServerSplunkRestart1]()|![AD-DemoAndServerSplunkRestart2]()|![AD-DemoAndServerSplunkRestart3]()|
+
+I then received a pop-up message stating "Windows could not stop the SplunkForwarder service on Local Computer". However, I clicked OK > selected SplunkForwarder > clicked Start at the top left of the "Services (Local)" tab, and this forwarder was still functional.
+
+![AD-DemoAndServerSplunkRestart4]()
+
 
 ## 4. Active Directory Server (AD-server) Configurations: Active Directory and Creating Users and Groups
 

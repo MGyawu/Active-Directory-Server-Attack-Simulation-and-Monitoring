@@ -147,11 +147,11 @@ Before installing these components I made sure to the change the name of AD-demo
 
 Now, in order to give these devices their static IP addresses I navigated to the the network icon and right clicked it > Open Network & Internet Settings > Change Adapter Options > Right Click the Adapter and select properties > doublie click Internet Protocol Version 4 (TCP/IPv4) > Select "Use the following IP address" and "Use the following DNS server address". I then entred these values:</p>
 
-### Target-PC:
-![AD-demoStaticIP](AD-demoStaticIP.png)</p>
+|Target-PC|AD-server|
+|---------|---------|
+|![AD-demoStaticIP](AD-demoStaticIP.png)|![AD-serverStaticIP](AD-serverStaticIP.png)|
 
-### AD-server:
-![AD-serverStaticIP](AD-serverStaticIP.png)</p>
+Next I installed Splunk Universal Forwarder. The link I showed above is the link to the Splunk Universal Forwarder installer, and I installed this from within my Target-PC and AD-server.
 
 ## 4. Active Directory Server (AD-server) Configurations: Active Directory and Creating Users and Groups
 

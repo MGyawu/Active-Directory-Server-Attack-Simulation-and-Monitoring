@@ -155,15 +155,15 @@ Now, in order to give these devices their static IP addresses I navigated to the
 
 Next I installed Splunk Universal Forwarder. The link I showed above is the link to the Splunk Universal Forwarder installer, and I downloaded the installer from a web browser within my Target-PC and AD-server. Once the download was completed, I ran the installer, checked off the box that stated "Check this box to accept the License Agreement", selected "An on-premises Splunk Enterprise instance", and then selected "Next".
 
-![AD-DemoAndServerSplunkForwarder1]()
+![AD-DemoAndServerSplunkForwarder1](AD-DemoAndServerSplunkForwarder1.png)
 
 On the next page, I entered "admin" as the user name then selected "Next" twice, skipping over the Deployment Server as I did not have one. Under the Receiving Indexer, I entered the Splunk Server IP address under "Hostname of IP", which is 192.168.10.10, and for the default port I entered 9997.
 
-![AD-DemoAndServerSplunkForwarder2]()
+![AD-DemoAndServerSplunkForwarder2](AD-DemoAndServerSplunkForwarder2.png)
 
 Following this, I navigated Next > Install. With this install continuing in the background, I then went on to download Sysmon and retrieve olafhartong's Sysmon configuration, links for the webpages for both above. From olafhartong's page I selected "Raw", and, once the new page loaded, I right clicked > clicked "Save as" > saved into Downloads.
 
-![AD-DemoAndServerSysmonConfig]()
+![AD-DemoAndServerSysmonConfig](AD-DemoAndServerSysmonConfig.png)
 
 From this point I extracted the orginal downloaded Sysmon zip file > copied the file path > ran Powershell as Administrator and entered this command
 ```
@@ -173,30 +173,58 @@ cd [File path of Sysmon]
 
 This is how mine looked:
 
-![AD-DemoAndServerDownloadSysmon1]()
+![AD-DemoAndServerDownloadSysmon1](AD-DemoAndServerDownloadSysmon1.png)
 
 After running this command a pop-up titled "System Monitor License Agreement" with info titled "SYSINTERNALS SOFTWARE LICENSE TERMS" appeared. Once I clicked agree, Sysmon will now download onto your system and begin.
 
-![AD-DemoAndServerDownloadSysmon2]()
+![AD-DemoAndServerDownloadSysmon2](AD-DemoAndServerDownloadSysmon2.png)
 
 Once I saw the message "Sysmon64 started", I know the download was complete. By this point the Splunk Universal Forwarder also finished its installation, and with that, I opened the file explorer and navigated down this path: This PC > Local Disk (C:) > Program Files > SplunkUniversalForwarder > etc > system > local. From here I ran Notepad as administrator and created the file "inputs.conf" that contains this:
 
-![AD-DemoAndServerInputs]()
+![AD-DemoAndServerInputs](AD-DemoAndServerInputs.png)
 
 This is vital for instructing the Splunk forwarder on what to send to the Splunk server. This specifially instructs the forwarder to forward information related to application, security, system, and sysmon to the Splunk server. Also, the index named "endpoint" specified in this file will need a corresponding index named endpoint created in order to receive these events. I create that later when I access Splunk enterprise. </p>
 
 Due to the fact that I created this "inputs.conf" file, I then followed that up by restarting the Splunk Forwarder Service. This action is necessary whenever inputs.conf is updated or changed. In order to do so, from the windows search bar at the bottom left I searched for the Services application > right clicked and chose Run as Administrator > Found "SplunkForwarder" among the list of applications and double clicked it > navigated to Log On > selected "Local System account" > click Apply and OK > Right click SplunkForwarder in services > select Restart.
 
-|![AD-DemoAndServerSplunkRestart1]()|![AD-DemoAndServerSplunkRestart2]()|![AD-DemoAndServerSplunkRestart3]()|
+![AD-DemoAndServerSplunkRestart1](AD-DemoAndServerSplunkRestart1.png)
+![AD-DemoAndServerSplunkRestart2](AD-DemoAndServerSplunkRestart2.png)
+![AD-DemoAndServerSplunkRestart3](AD-DemoAndServerSplunkRestart3.png)
+
 
 I then received a pop-up message stating "Windows could not stop the SplunkForwarder service on Local Computer". However, I clicked OK > selected SplunkForwarder > clicked Start at the top left of the "Services (Local)" tab, and this forwarder was still functional.
 
-![AD-DemoAndServerSplunkRestart4]()
+![AD-DemoAndServerSplunkRestart4](AD-DemoAndServerSplunkRestart4.png)
+
 
 
 ## 4. Active Directory Server (AD-server) Configurations: Active Directory and Creating Users and Groups
 
-## 5. Target PC (AD-demo) Configuration: Installing AtomicRedTeam
+## 5. Target PC (AD-demo) Configuration: Enabling Remote Desktop and Installing AtomicRedTeam
+
+## 6. Splunk Enterprise Configuration: Creating Endpoint Index
+
+This can be done from either the AD server or the Target PC as this was done in a browser. I completed this from the Target PC, but that has no bearing on whether this can be done. I opened a browser and entered 192.168.10.10:8000 into the search bar. This brought me to the Splunk Web Portal, where I enter the same credentials that I entered when installing Splunk onto the Splunk server. 
+
+![AD-EnterpriseLogin]()
+
+
+After logging in, I navigated Settings at the top of the screen > Indexes > New Index > set the Index Name to "endpoint" as show in inputs.conf > save. The endpoint index is now be visible among the list of indexes. From this page I scrolled down and saw it among the other index.
+
+![AD-EnterpriseEndpointIndexList]()
+
+Now, to enable my Splunk server to receive the data that is sent to endpoint from my machine, I navigated from Settings > Forwarding and receiving > Configure receiving > New Receiving Port > and I entered 9997 into "Listen on this port" (this is the same port that I set as the default port in the Splunk Forwarder) > Save. This brought me to a page titled "Receiving Data" with the port I entered listed.
+
+|![AD-EnterpriseDefaultPort]()|![AD-EnterpriseDefaultPortEnabled]()|
+|-----------------------------|------------------------------------|
+
+In order to see logs from devices, I navigated Apps > Search & Reporting > In the search bar I entered "index=endpoint". This search produces logs from all the devices (the Target PC and the AD Server) forwarding them to the Splunk server I created earlier, and these logs contain information on Application, System, Security, and Sysmon (as defined in inputs.conf).
+
+|![AD-EnterpriseFirstSearch1]()|![AD-EnterpriseFirstSearch2]()|![AD-EnterpriseFirstSearch3]()|
+|------------------------------|------------------------------|------------------------------|
+
+
+## 7. Attacking PC Configuration: Static IP
 
 ## Attack Simulation and Monitoring
 

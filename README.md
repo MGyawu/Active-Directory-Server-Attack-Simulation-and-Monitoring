@@ -200,6 +200,18 @@ I then received a pop-up message stating "Windows could not stop the SplunkForwa
 
 ## 4. Active Directory Server (AD-server) Configurations: Active Directory and Creating Users and Groups
 
+In order to install and configure Active Directory into my AD server, I opened the Service Manager and navigated Manage > Add Roles and Features > Next > Ensured that "Role-Based or feature-based installation" is selected and click Next > Selected AD-server from a list of servers and clicked Next > Active Directory Domain Services > Add Features > Kept on clicking Next until I saw "Install" > Install. Once I saw "Configuration required. Installation Succeeded" under the progress bar, I knew that Active Directory has completed installation.
+
+|![AD-ServerInstallAD1]()|![[AD-ServerInstallAD2]()|![[AD-ServerInstallAD3]()|
+
+
+After closing out from the installation page, I returned to Server Manager and navigated from the Flag icon at the top of the window > Promote this server to a domain controller > Selected "Add a new forest", entered meadbag.local (needed a top level domain) as my Root domain name, and clicked Next > Entered a password and clicked Next > continued to click Next until I saw "Verifying prerequisites for domain > controller operation ..." > Install when it was available. Once the install was finished the server restarted on its own.
+
+|![AD-ServerPromote1]()|![AD-ServerPromote2]()|![AD-ServerPromote3]()|
+
+
+
+
 ## 5. Target PC (AD-demo) Configuration: Enabling Remote Desktop and Installing AtomicRedTeam
 
 ## 6. Splunk Enterprise Configuration: Creating Endpoint Index

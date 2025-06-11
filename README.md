@@ -206,21 +206,21 @@ I then received a pop-up message stating "Windows could not stop the SplunkForwa
 
 This can be done from either the AD server or the Target PC as this was done in a browser. I completed this from the Target PC, but that has no bearing on whether this can be done. I opened a browser and entered 192.168.10.10:8000 into the search bar. This brought me to the Splunk Web Portal, where I enter the same credentials that I entered when installing Splunk onto the Splunk server. 
 
-![AD-EnterpriseLogin]()
+![AD-EnterpriseLogin](AD-EnterpriseLogIn.png)
 
 
 After logging in, I navigated Settings at the top of the screen > Indexes > New Index > set the Index Name to "endpoint" as show in inputs.conf > save. The endpoint index is now be visible among the list of indexes. From this page I scrolled down and saw it among the other index.
 
-![AD-EnterpriseEndpointIndexList]()
+![AD-EnterpriseEndpointIndexList](AD-EnterpriseEndpointIndexList.png)
 
 Now, to enable my Splunk server to receive the data that is sent to endpoint from my machine, I navigated from Settings > Forwarding and receiving > Configure receiving > New Receiving Port > and I entered 9997 into "Listen on this port" (this is the same port that I set as the default port in the Splunk Forwarder) > Save. This brought me to a page titled "Receiving Data" with the port I entered listed.
 
-|![AD-EnterpriseDefaultPort]()|![AD-EnterpriseDefaultPortEnabled]()|
+|![AD-EnterpriseDefaultPort](AD-EnterpriseDefaultPort.png)|![AD-EnterpriseDefaultPortEnabled](AD-EnterpriseDefaultPortEnabled.png)|
 |-----------------------------|------------------------------------|
 
 In order to see logs from devices, I navigated Apps > Search & Reporting > In the search bar I entered "index=endpoint". This search produces logs from all the devices (the Target PC and the AD Server) forwarding them to the Splunk server I created earlier, and these logs contain information on Application, System, Security, and Sysmon (as defined in inputs.conf).
 
-|![AD-EnterpriseFirstSearch1]()|![AD-EnterpriseFirstSearch2]()|![AD-EnterpriseFirstSearch3]()|
+|![AD-EnterpriseFirstSearch1](AD-EnterpriseFirstSearch1.png)|![AD-EnterpriseFirstSearch2](AD-EnterpriseFirstSearch2.png)|![AD-EnterpriseFirstSearch3](AD-EnterpriseFirstSearch3.png)|
 |------------------------------|------------------------------|------------------------------|
 
 

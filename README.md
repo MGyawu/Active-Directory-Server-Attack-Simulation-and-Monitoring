@@ -213,12 +213,12 @@ After closing out from the installation page, I returned to Server Manager and n
 
 Once the reboot was finished, I saw that my login screen had MEADBAG\Administrator as the account to log into for the server. Now that I have installed Active Directory on this server, it is time for me to create a new organizational unit and a user that is assigned to that unit. In order to do this, I went back to main page of the Server Manager and navigated from Tools > Active Directory Users and Computers. From here I saw the top level domain(meadbag.local) of the active directory server and a list of all the organizational units within that domain on the left side, and on the right a list of premade groups.
 
-![AD-ServerDomainAndUnits]()
+![AD-ServerDomainAndUnits](AD-ServerDomainAndUnits.png)
 
 I then right clicked meadbag.local and navigated from New > Organizational Unit. I then created two new units: IT and HR. Within the HR unit, I right clicked and navigated from New > User and gave this new user the name Terry Smith and the User logon name tsmith, and clicked Next. I then gave it the password Blamo@abc.69, unchecked "User must change password at next logon", and hit Next and Finish on the following page.
 
-![AD-ServerCreateNewUnit1]()
-![AD-ServerCreateNewUnit2]()
+![AD-ServerCreateNewUnit1](AD-ServerCreateUnit1.png)
+![AD-ServerCreateNewUnit2](AD-ServerCreateUnit2.png)
 
 I then repeated the same steps to create a user named Jenny Smith with a user logon name of jsmith, the same password, and in the IT organizational unit.
 

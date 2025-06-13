@@ -39,6 +39,7 @@ Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternal
 Sysmon Configuration: [olafhartong Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)</p>
 [Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)</p>
 
+
 ### Attacking PC (Pre-built Kali-linux VM)
 OS: [Kali](https://www.kali.org/get-kali/#kali-virtual-machines)</p>
 Memory: 2 gbs (2048 mbs)</p>
@@ -224,6 +225,36 @@ I then repeated the same steps to create a user named Jenny Smith with a user lo
 
 ## 5. Target PC (AD-demo) Configuration: Enabling Remote Desktop and Installing AtomicRedTeam
 
+I signed into the jsmith (Jenny Smith) account through the Target PC. In order to enable remote desktop I had to search for PC in the search bar at the bottom left and navigated Properties > Advanced system settings > entered the administrator credentials (the credentials for the AD Server) and clicked Yes > the Remote tab > Select "Allow remote connections to this computer" > Select Users > Add > search for jsmith's account name > OK > OK > Apply > OK
+
+![AD-DemoRemoteDesktop1]()
+![AD-DemoRemoteDesktop2]()
+
+Now, my next step was to install Atomic Red Team. My first step was to run Powershell as administrator, login using the administrator credentials again and enter this command:
+```
+Set-ExecutionPolicy BypassCurrentUser
+```
+
+Once I saw the image below, I typed "y" and hit enter:
+
+![AD-DemoAtomicRedTeam1]()
+
+My next step was to set an exclusion for the C drive to stop Microsoft defender from removing files from Atomic Red Team when I download them. In order to do so I navigated to the Upward facing arrow in the task bar's right hand side > Windows Security > Virus and Threat Protection > Manage Settings > Add or remove exclusions > Add an exclusion > Folder > This PC > Local Disk (C:) > Select Folder. Here is the C drive as part of the list of exclusions:
+
+![AD-DemoAtomicRedTeam2]()
+
+I then returned to the Powershell window and entered these commands:
+```
+IEX (IWR 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/install-atomicredteam.ps1' -UseBasicParsing);
+Install-AtomicRedTeam
+```
+Once prompted, I type "y" and hit enter to install dependencies for Atomic Red Team. Once you see below, you know that the Atomic Red Team download and installation has been completed.
+
+![AD-DemoAtomicRedTeam3]()
+
+In order to see the full list of Atomics and their technique IDs, I opened the file explorer and navigated This PC > Local Disk (C:) > AtomicRedTeam > atomics.
+
+![AD-DemoAtomicRedTeam4]()
 
 
 ## 6. Splunk Enterprise Configuration: Creating Endpoint Index

@@ -224,6 +224,8 @@ I then repeated the same steps to create a user named Jenny Smith with a user lo
 
 ## 5. Target PC (AD-demo) Configuration: Enabling Remote Desktop and Installing AtomicRedTeam
 
+
+
 ## 6. Splunk Enterprise Configuration: Creating Endpoint Index
 
 This can be done from either the AD server or the Target PC as this was done in a browser. I completed this from the Target PC, but that has no bearing on whether this can be done. I opened a browser and entered 192.168.10.10:8000 into the search bar. This brought me to the Splunk Web Portal, where I enter the same credentials that I entered when installing Splunk onto the Splunk server. 

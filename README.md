@@ -290,7 +290,7 @@ Gateway: 192.168.10.1</p>
 
 I then gave the DNS server a value of 8.8.8.8 and clicked Save.
 
-![AD-KaliNetworkConfig]()
+![AD-KaliNetworkConfig](AD-KaliNetworkConfig.png)
 
 Now in order to have these changes active, I clicked the ethernet icon at the top of the screen, selected Disconnect, clicked the ethernet icon again and clicked Wired connection 1. </p>
 

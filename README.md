@@ -296,7 +296,7 @@ Now in order to have these changes active, I clicked the ethernet icon at the to
 
 Before working with this, I opened the terminal and made sure to run this command to ensure everything is up to date:
 ```
-sudo apt-get update && sudo apt-get upgrade
+sudo apt-get update && sudo apt-get upgrade -y
 ```
 
 

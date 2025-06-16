@@ -282,6 +282,24 @@ In order to see logs from devices, I navigated Apps > Search & Reporting > In th
 
 ## 7. Attacking PC Configuration: Static IP
 
+I logged into the prebuilt Kali VM specified above (default credentials were username: kali and password: kali). I then right clicked the ethernet icon in the top right and navigated Edit Connections > Selected Wired connection 1 and then clicked the gear icon at the bottom of the window > IPv4 Settings. From here I set Method to Manual. Following this I clicked Add to add a new addresss, which I gave the following values:
+
+Address: 192.168.10.250</p>
+Netmask: 24</p>
+Gateway: 192.168.10.1</p>
+
+I then gave the DNS server a value of 8.8.8.8 and clicked Save.
+
+![AD-KaliNetworkConfig]()
+
+Now in order to have these changes active, I clicked the ethernet icon at the top of the screen, selected Disconnect, clicked the ethernet icon again and clicked Wired connection 1. </p>
+
+Before working with this, I opened the terminal and made sure to run this command to ensure everything is up to date:
+```
+sudo apt-get update && sudo apt-get upgrade
+```
+
+
 ## Attack Simulation and Monitoring
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________

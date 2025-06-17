@@ -319,7 +319,7 @@ head -n 20 rockyou.txt > passwords.txt
 
 The next step I took, was to add the password for the jsmith account, Blamo@abc.69, to the end of passwords.txt by typing ```nano passwords.txt```, entering the password at the bottom and saving.
 
-![AD-SimPasswordList]()
+![AD-SimPasswordList](AD-SimPasswordList.png)
 
 After saving an exiting that file, I then ran this command to perform the attack:
 
@@ -331,7 +331,15 @@ Here was outcome of running this command:
 
 ![AD-SimRdpSuccess]()
 
+This is what a successful attempt at a brute force attack on the jsmith account looks like. I then went to Splunk to see if the logs of this attack had been ingeested. Into the search bar I entered "index=endpoint jsmith" and set the search for the past 15 minutes, during which my simulated attack occurred. After performing this search and selecting EventCode on the left- hand side, I saw 29 instances of the [event code 4625](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4625) which is the Windows event ID for a failed login attempt.
 
+![AD-SimBruteForce4](AD-SimBruteForce4.png)
+![AD-SimBruteForce1](AD-SimBruteForce1.png)
+
+After entering the search "index=endpoint jsmith EventCode=4625", I saw that most of these failed login attempts occurred less than one minute away from each other, implying a brute force attack attempt, and each log has details of the account being attacked, the attackign workstation's name and IP address, and the details of the login error detected.
+
+![AD-SimBruteForce2](AD-SimBruteForce2.png)
+![AD-SimBruteForce3](AD-SimBruteForce3.png)
 
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________

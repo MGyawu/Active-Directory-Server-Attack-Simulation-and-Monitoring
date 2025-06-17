@@ -329,7 +329,7 @@ hydra -l jsmith -P passwords.txt 192.168.10.100 rdp
 
 Here was outcome of running this command:
 
-![AD-SimRdpSuccess]()
+![AD-SimRdpSuccess](AD-SimRdpSuccess2.png)
 
 This is what a successful attempt at a brute force attack on the jsmith account looks like. I then went to Splunk to see if the logs of this attack had been ingeested. Into the search bar I entered "index=endpoint jsmith" and set the search for the past 15 minutes, during which my simulated attack occurred. After performing this search and selecting EventCode on the left- hand side, I saw 29 instances of the [event code 4625](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4625) which is the Windows event ID for a failed login attempt.
 

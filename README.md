@@ -302,6 +302,38 @@ sudo apt-get update && sudo apt-get upgrade -y
 
 ## Attack Simulation and Monitoring
 
+### Brute Force Simulation
+
+The goal of this attack simulation is to perform a brute force attack on the jsmith (Jenny Smith) account using the Remote Desktop Protocol that I enabled earlier. In order to do this I logged into my kali linux machine, opened the Terminal, and created a directory called "ad-project" and change to that directory. For this brute force attack, I will be using the hydra command in linux (this can alsi be done with installing crowbar instead). Before I got to that though I needed a list of potential passwords for this attack. In my kali linux machine I had the file  ```/usr/share/wordlists/rockyou.txt.gz``` . This is a popular wordlist file that is typically in kali linux machines.I used this to create my list of passwords by running these commands:
+
+```
+sudo gunzip /usr/share/wordlists/rockyou.txt.gz
+cp /usr/share/wordlists/rockyou.txt.gz ad-project
+```
+
+In order to save time and memory, as the rockyou.txt is a large file, I ran this command to create a file that only has 20 lines:
+
+```
+head -n 20 rockyou.txt > passwords.txt
+```
+
+The next step I took, was to add the password for the jsmith account, Blamo@abc.69, to the end of passwords.txt by typing ```nano passwords.txt```, entering the password at the bottom and saving.
+
+![AD-SimPasswordList]()
+
+After saving an exiting that file, I then ran this command to perform the attack:
+
+```
+hydra -l jsmith -P passwords.txt 192.168.10.100 rdp
+```
+
+Here was outcome of running this command:
+
+![AD-SimRdpSuccess]()
+
+
+
+
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## 1. Splunk Server (AD-splunk) Configurations and Splunk Installation
 

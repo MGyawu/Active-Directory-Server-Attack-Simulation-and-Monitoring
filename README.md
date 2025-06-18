@@ -299,7 +299,7 @@ Before working with this, I opened the terminal and made sure to run this comman
 sudo apt-get update && sudo apt-get upgrade -y
 ```
 
-
+____________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## Attack Simulation and Monitoring
 
 ### Brute Force Simulation
@@ -342,94 +342,30 @@ After entering the search "index=endpoint jsmith EventCode=4625", I saw that mos
 ![AD-SimBruteForce3](AD-SimBruteForce3.png)
 
 
-### Persistence Tactic for an Attack: Create New User in Domain
+### Atomic Red Team - Persistence Tactic for an Attack: Create New User in Domain
 
-In order to perform a persistence attack, during which we create a new account within out domain meadbag.local, as defined by the [Mitre Att&ck framework]((https://attack.mitre.org/)), I logged into my Target PC using the jsmith account, opened the file explorer and navigated This PC > Local Disk (C:) > AtomicRedTeam > atomics > and searched for the folder labeled T1136.002. This file corresponds to the to the MITRE attack type [T1136.002: Create a Domain Account](https://attack.mitre.org/techniques/T1136/002/) which should create an account within the meadbag.local domain.
+In order to perform a persistence attack, during which we create a new account to target the Target-PC, as defined by the [Mitre Att&ck framework]((https://attack.mitre.org/)), I logged into my Target PC using the jsmith account, opened the file explorer and navigated This PC > Local Disk (C:) > AtomicRedTeam > atomics > and searched for the folder labeled T1136.001. This file corresponds to the to the MITRE attack type [T1136.001: Create a Local Account](https://attack.mitre.org/techniques/T1136/001/).
 
 ![AD-SimPersist1]()
 
 Now that I have found this folder, I ran powershell as administrator to begin this attack. I then entered this command:
 
 ```
-Invoke-Atomic T1136.002
+Invoke-Atomic T1136.001
 ```
 
-____________________________________________________________________________________________________________________________________________________________________________________________________________________
-## 1. Splunk Server (AD-splunk) Configurations and Splunk Installation
+Once I saw what is shown below I knew that the command and account create had been successfully ran:
 
-In order to collect logs of and monitor our simulated attack, we need to configure an instance of a an SIEM (secure information event manager) within a system that ingests logs from other devices within this network. Here, we will be configure an Ubuntu based Splunk server. Here are the links from where I acquired the Ubuntu OS and Splunk enterprise for this server:
+![AD-SimPersist4]()
 
-OS: [Ubuntu 20.04 LTS](https://ubuntu.com/download/server)</p>
-Splunk: [Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html)</p>
-Memory: 8 gbs (8192 mbs)</p>
-Storage: 100 gbs</p>
+As seen in the image above there was a new account name "NewLocalUser" that has been created and deleted. I then opened Splunk Enterprise and conducted the search "index=endpoint NewLocalUser" to see if this was reflected in the logs. There are 24 events. Because we know that the account had been created and deleted, this means that within these logs there should be a a log with [Event Code 4720](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4720), which is the Windows log event ID for an account creation, and a log with [Event Code 4726](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4726), which is the Windows log event ID for an account deletion.
 
-After the initial setup my initial setup of my ubuntu server, I needed to give the server the static IP address that I specified in the diagram above. In order to do that, I entered this command into the Ubuntu terminal:
+![AD-SimPersist5]()
 
-```
-sudo nano /etc/netplan/50-cloud-init.yaml
-```
-Now that the file "50-cloud-init.yaml" is open, fill its contents with the following:
+#### Account Creation
+![AD-SimPersist7Create]()
 
-![Splunk server static IP](AD-splunkserverStaticIP1.png)
+#### Account Deletion
+![AD-SimPersist6Delete]()
 
-In order for the changes to this file to persist after a reboot, enter this command:
-
-```
-sudo nano /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
-```
-
-Now that "99-disable-network-config.cfg" is open, fill its contents with the following:
-
-![Splunk server static IP pt2](AD-splunkserverStaticIP2.png)
-
-In order to apply these changes enter this command:
-
-```
-sudo netplan apply
-```
-
-Note: if you want to check and see if the static IP has been correctly applied, enter this command:
-```
-ip a
-```
-
-## 2. Network Configuration in VirtualBox
-It was important for this project to ensure that each virtual machine is on the name network and have internet access. In the virtualbox menu navigate from Tools > Network > NAT Network > select create. From here give the new network a name, I chose AD-network, give the IPV4 Prefix a value of 192.168.10.0/24, and finally select apply.
-
-![AD Nat Network Config](AD-NatNetworkimage.png)
-
-Now for each virtual machine, select settings > Network. Set "Attached to: " to "NAT Network" and then set "Name" to the network that you have chosen. Finally click "OK."
-
-![Nat Network for each VM](AD-NatNewtorkSelectionForEachMachine.png)
-
-
-
-###
-
-### Active Directory Server (ADserver)
-OS: [Windows Server 2022](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022)</p>
-Memory: 4 gbs(4096 mbs)</p>
-Storage: 50 gbs</p>
-Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) </p>
-[Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)</p>
-
-
-### Target PC (ADdemo)
-OS:  [Windows 10](https://www.microsoft.com/en-us/software-download/windows10)</p>
-Memory: 6 gbs (6114 mbs)</p>
-Storage: 50 gbs</p>
-Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)</p>
-[Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)</p>
-
-
-
-### Attacking PC (Kali-linux VM)
-OS: [Kali](https://www.kali.org/get-kali/#kali-virtual-machines)</p>
-Memory: 2 gbs (2048 mbs)</p>
-Storage: 80 gbs</p>
-
-
-
-## Collecting Telemetry
-## Performing Attacks
+As seen above, the logs of the creation and deletion of this account have been ingested into my Splunk instance and are observable.

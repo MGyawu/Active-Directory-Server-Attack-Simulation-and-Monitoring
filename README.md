@@ -342,6 +342,18 @@ After entering the search "index=endpoint jsmith EventCode=4625", I saw that mos
 ![AD-SimBruteForce3](AD-SimBruteForce3.png)
 
 
+### Persistence Tactic for an Attack: Create New User in Domain
+
+In order to perform a persistence attack, during which we create a new account within out domain meadbag.local, as defined by the [Mitre Att&ck framework]((https://attack.mitre.org/)), I logged into my Target PC using the jsmith account, opened the file explorer and navigated This PC > Local Disk (C:) > AtomicRedTeam > atomics > and searched for the folder labeled T1136.002. This file corresponds to the to the MITRE attack type [T1136.002: Create a Domain Account](https://attack.mitre.org/techniques/T1136/002/) which should create an account within the meadbag.local domain.
+
+![AD-SimPersist1]()
+
+Now that I have found this folder, I ran powershell as administrator to begin this attack. I then entered this command:
+
+```
+Invoke-Atomic T1136.002
+```
+
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## 1. Splunk Server (AD-splunk) Configurations and Splunk Installation
 

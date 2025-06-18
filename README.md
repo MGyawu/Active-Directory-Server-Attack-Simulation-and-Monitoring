@@ -346,7 +346,7 @@ After entering the search "index=endpoint jsmith EventCode=4625", I saw that mos
 
 In order to perform a persistence attack, during which we create a new account to target the Target-PC, as defined by the [Mitre Att&ck framework]((https://attack.mitre.org/)), I logged into my Target PC using the jsmith account, opened the file explorer and navigated This PC > Local Disk (C:) > AtomicRedTeam > atomics > and searched for the folder labeled T1136.001. This file corresponds to the to the MITRE attack type [T1136.001: Create a Local Account](https://attack.mitre.org/techniques/T1136/001/).
 
-![AD-SimPersist1]()
+![AD-SimPersist1](AD-SimPersist1.png)
 
 Now that I have found this folder, I ran powershell as administrator to begin this attack. I then entered this command:
 
@@ -356,16 +356,16 @@ Invoke-Atomic T1136.001
 
 Once I saw what is shown below I knew that the command and account create had been successfully ran:
 
-![AD-SimPersist4]()
+![AD-SimPersist4](AD-SimPersist4.png)
 
 As seen in the image above there was a new account name "NewLocalUser" that has been created and deleted. I then opened Splunk Enterprise and conducted the search "index=endpoint NewLocalUser" to see if this was reflected in the logs. There are 24 events. Because we know that the account had been created and deleted, this means that within these logs there should be a a log with [Event Code 4720](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4720), which is the Windows log event ID for an account creation, and a log with [Event Code 4726](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4726), which is the Windows log event ID for an account deletion.
 
-![AD-SimPersist5]()
+![AD-SimPersist5](AD-SimPersist5.png)
 
 #### Account Creation
-![AD-SimPersist7Create]()
+![AD-SimPersist7Create](AD-SimPersist7Create.png)
 
 #### Account Deletion
-![AD-SimPersist6Delete]()
+![AD-SimPersist6Delete](AD-SimPersist6Delete.png)
 
 As seen above, the logs of the creation and deletion of this account have been ingested into my Splunk instance and are observable.

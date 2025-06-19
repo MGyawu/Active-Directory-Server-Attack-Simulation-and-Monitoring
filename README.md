@@ -21,64 +21,39 @@ Here are the specifications for each virtual machine. If the block is empty, the
 |Sysmon||[Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)|[Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)||
 |Sysmon Config|| [olafhartong Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)| [olafhartong Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)||
 
-### Splunk Server (AD-splunk)
-OS: [Ubuntu 20.04 LTS](https://ubuntu.com/download/server)</p>
-Splunk: [Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html)</p>
-Memory: 8 gbs (8192 mbs)</p>
-Storage: 100 gbs</p>
-
-### Active Directory Server (AD-server)
-OS: [Windows Server 2022](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022)</p>
-Memory: 4 gbs(4096 mbs)</p>
-Storage: 50 gbs</p>
-Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) </p>
-Sysmon Configuration: [olafhartong Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)</p>
-[Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)</p>
-
-### Target PC (ADdemo)
-OS: [Windows 10](https://www.microsoft.com/en-us/software-download/windows10)</p>
-Memory: 6 gbs (6114 mbs)</p>
-Storage: 50 gbs</p>
-Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)</p>
-Sysmon Configuration: [olafhartong Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)</p>
-[Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)</p>
-
-
-### Attacking PC (Pre-built Kali-linux VM)
-[Prebuilt Kali Virtual Machine](https://www.kali.org/get-kali/#kali-virtual-machines)</p>
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## 1. Network Configuration
-It was important for this project to ensure that each virtual machine is on the name network and have internet access. In the virtualbox menu navigate from Tools > Network > NAT Network > select create. From here give the new network a name, I chose AD-network, give the IPV4 Prefix a value of 192.168.10.0/24, and finally select apply.
+It was important for this project to ensure that each virtual machine is on the same network and have internet access. In the virtualbox menu I navigated from Tools > Network > NAT Network > select create. From here I gave the new network the name AD-network, gave the IPV4 Prefix a value of 192.168.10.0/24, and finally selected apply.
 
 ![AD Nat Network Config](AD-NatNetworkimage.png)
 
-Now for each virtual machine, select settings > Network. Set "Attached to: " to "NAT Network" and then set "Name" to the network that you have chosen. Finally click "OK."
+Now for each virtual machine I selected Settings > Network. I then set "Attached to: " to NAT Network and then set "Name" to AD-network that you have chosen. Finally, I clicked "OK."
 
 ![Nat Network for each VM](AD-NatNewtorkSelectionForEachMachine.png)
 
 ## 2. Splunk Server (AD-splunk) Configurations and Splunk Installation
 
-In order to collect logs of and monitor our simulated attack, we need to configure an instance of a an SIEM (secure information event manager) within a system that ingests logs from other devices within this network. Here, we will be configure an Ubuntu based Splunk server. After the initial setup my initial setup of my ubuntu server, I needed to give the server the static IP address that I specified in the diagram above. In order to do that, I entered this command into the Ubuntu terminal:
+In order to collect logs of and monitor our simulated attack, I needed to configure an instance of a an SIEM (Secure information Event Manager) within a system that ingests logs from other devices within this network. Here, I configured an Ubuntu based Splunk server. After my initial installation of my Ubuntu server virtual machine, I needed to give the server the static IP address that I specified in the diagram above (192.168.10.10). In order to do that, I entered this command into the Ubuntu terminal:
 
 ```
 sudo nano /etc/netplan/50-cloud-init.yaml
 ```
-Now that the file "50-cloud-init.yaml" is open, fill its contents with the following:
+Now that the file "50-cloud-init.yaml" was opened, I filled its contents with the following:
 
 ![Splunk server static IP](AD-splunkserverStaticIP1.png)
 
-In order for the changes to this file to persist after a reboot, enter this command:
+In order for the changes to this file to persist after a reboot, I entered this command:
 
 ```
 sudo nano /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
 ```
 
-Now that "99-disable-network-config.cfg" is open, fill its contents with the following:
+Now that "99-disable-network-config.cfg" is open, I filled its contents with the following:
 
 ![Splunk server static IP pt2](AD-splunkserverStaticIP2.png)
 
-In order to apply these changes enter this command:
+In order to apply these changes, I entered this command:
 
 ```
 sudo netplan apply
@@ -89,33 +64,33 @@ Note: if you want to check and see if the static IP has been correctly applied, 
 ip a
 ```
 
-The Next step is to install the guest addons for virtual box. In order to do so, I performed this command:
+The Next step wa to install the guest addons for virtual box. In order to do so, I performed this command:
 ```
 sudo apt-get install virtualbox-guest-additions-iso
 ```
-I then typed "y" when prompted and hit "enter" and "enter" again once the the purple screen and menu appears. Now at the top of the server window (virtualbox menu at the top), use the mouse to navigate from Devices > Shared Folders > Shared Folder Settings. Now select the add folder button on the right side of the window. Under "Folder Path" search for and chose the path underwhich you stored the Splunk Enterprise download. Next provide a name for "Folder Name", I chose "Splunk", and check all of the boxes underneath.
+I then typed "y" when prompted and hit "enter" and "enter" again once the the purple screen and menu appears. Now at the top of the server window (virtualbox menu at the top), I navigated from Devices > Shared Folders > Shared Folder Settings. I then selected the add folder button on the right side of the window. Under "Folder Path" I searched for and chose the path underwhich I stored stored the Splunk Enterprise download. Next I for "Folder Name" I entered "Splunk", and checked all of the boxes underneath.
 
 ![Add Splunk Folder](AD-splunkaddfolder.png)
 
-Click "OK" twice and return to the server. Now reboot the virtual machine. This can be done by typing:
+I then clicked "OK" twice and returned to the server. Afterward I rebooted the server by typing:
 
 ```
 sudo reboot
 ```
 
-Now is the time to add some virtual box installations that may have yet to be installed. Enter this command:
+I then decided to add some virtual box installations that may have yet to be installed. Enter this command:
 
 ```
 sudo apt-get install virtualbox-guest-utils
 ```
 
-Now reboot one more time. After I logged in I added the user to the "vboxsf" group. This can be done by entering this command:
+ I then rebooted one more time and after I logged in I added the my user to the "vboxsf" group by entering this command:
 
 ```
-sudo adduser [enter your username here] vboxsf
+sudo adduser meadbag vboxsf
 ```
 
-Now to mount the shared folder to a directory to a folder in the server, I created a folder named "share". I then entered this command:
+Where meadbag is my user. Now to mount the shared folder to a directory to a folder in the server, I created a folder named "share". I then entered this command:
 ```
 sudo mount -t vboxsf -o uid=1000,gid=1000 Splunk share/
 ```
@@ -123,20 +98,20 @@ I then changed directions into the share folder. You can see it in the share fol
 
 ![Splunk Mounted](AD-splunkmounted.png)
 
-To perform my splunk install I entered this command:
+As you can see the Splunk installer file is visible in the image above. To perform my splunk install I entered this command:
 
 ```
 sudo dpkg -i [splunk installer file]
 ```
 
-Once I saw "complete" following this command, I changed to the /opt/splunk directory, which is where splunk is now located. To enter the splunk user and install splunk, I entered these commands:
+Once I saw "complete" following this command, I changed to the /opt/splunk directory, which is where Splunk is now located. To enter the Splunk user and install Splunk, I entered these commands:
 ```
 sudo -u splunk bash
 cd bin
 ./splunk start
 ```
 
-I went to the end of the user aggreement and then entered "y" when I was prompted. I then entered and administrator username and password for my splunk instance. Afterward, I entered this command to ensure that every time I boot this server/virtual machine my splunk instance starts up:
+I went to the end of the user agreement and then entered "y" when I was prompted. I then entered and administrator username and password for my splunk instance. Afterward, I entered this command to ensure that every time I boot this server/virtual machine my splunk instance starts up:
 
 ```
 exit
@@ -146,13 +121,16 @@ sudo ./splunk enable boot-start -user splunk
 
 ## 3. Target PC (AD-demo) and Active Directory Server (AD-server) Configurations: Static IP addresses, Splunk Universal Forwarder, and Sysmon
 
-Before installing these components I made sure to the change the name of AD-demo to "target-PC" and AD-server to "ADserver" from the windows menu, this way these are the names of the hosts that appear in the Splunk logs. This can be done by Navigating Windows menu > Type PC and select properties (in the windows server you may have to right click PC to get this option) > select "Rename PC". I then entered the new name and restarted these machines once prompted.
+Before installing these components, I made sure to the change the name of AD-demo to "target-PC" and AD-server to "ADserver" from the windows menu, this way these are the names of the hosts that appear in the Splunk logs. This can be done by navigating Windows menu > Type PC and select properties (in the windows server you may have to right click PC to get this option) > select "Rename PC". I then entered the new name and restarted these machines once prompted.
 
-Now, in order to give these devices their static IP addresses I navigated to the the network icon and right clicked it > Open Network & Internet Settings > Change Adapter Options > Right Click the Adapter and select properties > doublie click Internet Protocol Version 4 (TCP/IPv4) > Select "Use the following IP address" and "Use the following DNS server address". I then entred these values:</p>
+Now, in order to give these devices their static IP addresses I navigated to the network icon and right clicked it > Open Network & Internet Settings > Change Adapter Options > Right Click the Adapter and selected properties > doublie click Internet Protocol Version 4 (TCP/IPv4) > Selected "Use the following IP address" and "Use the following DNS server address". I then entred these values:</p>
 
-|Target-PC|AD-server|
-|---------|---------|
-|![AD-demoStaticIP](AD-demoStaticIP.png)|![AD-serverStaticIP](AD-serverStaticIP.png)|
+
+### Target-PC
+![AD-demoStaticIP](AD-demoStaticIP.png)
+
+### AD-server
+![AD-serverStaticIP](AD-serverStaticIP.png)
 
 Next I installed Splunk Universal Forwarder. The link I showed above is the link to the Splunk Universal Forwarder installer, and I downloaded the installer from a web browser within my Target-PC and AD-server. Once the download was completed, I ran the installer, checked off the box that stated "Check this box to accept the License Agreement", selected "An on-premises Splunk Enterprise instance", and then selected "Next".
 
@@ -248,7 +226,7 @@ I then returned to the Powershell window and entered these commands:
 IEX (IWR 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/install-atomicredteam.ps1' -UseBasicParsing);
 Install-AtomicRedTeam
 ```
-Once prompted, I type "y" and hit enter to install dependencies for Atomic Red Team. Once you see below, you know that the Atomic Red Team download and installation has been completed.
+Once prompted, I typed "y" and hit enter to install dependencies for Atomic Red Team. Once you see below, you know that the Atomic Red Team download and installation has been completed.
 
 ![AD-DemoAtomicRedTeam3](AD-DemoAtomicRedTeam3.png)
 

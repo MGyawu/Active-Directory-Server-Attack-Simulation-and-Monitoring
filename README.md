@@ -3,7 +3,7 @@
 
 In this project, I sought to emulate a real world network where user accounts are created and place into organizational units through an Active Directory server. One of these accounts and the PC they was subject to an attack to an attack by a separate system, and the logs of the targeted pc and the Active Directory server are all ingested into a Splunk server within this network. The goal of this project was to not only create and learn about how networks in which permissions are given through Active Directory are structured, but to also learn how attacks are observed and detected within Splunk. Here is a diagram of the network below:
 
-![Diagram](ADProject.png)
+![Diagram](ADProject.drawio.png)
 
 
 All of the devices within this metwork network were constructed as virtual machines where Virtualbox is the hypervisor used. 

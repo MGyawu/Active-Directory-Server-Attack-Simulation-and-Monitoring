@@ -1,21 +1,25 @@
 # Active-Directory-Server-Attack-Simulation-and-Monitoring
 ## Introduction
 
-At the center of this project is a virtual environment meant to represent a real-world network
-through a collection of virtual machines. Users and permissions are provided within an Active
-Directory server, logs are sent to a separate Splunk server, a Windows 10 VM serves as the
-target PC (the PC through which users log in), and a kali linux VM is a lone PC. This
-environment is illustrated in the diagram below:
+In this project, I sought to emulate a real world network where user accounts are created and place into organizational units through an Active Directory server. One of these accounts and the PC they was subject to an attack to an attack by a separate system, and the logs of the targeted pc and the Active Directory server are all ingested into a Splunk server within this network. The goal of this project was to not only create and learn about how networks in which permissions are given through Active Directory are structured, but to also learn how attacks are observed and detected within Splunk. Here is a diagram of the network below:
 
 ![Diagram](ADProject.png)
 
-The purpose of this project is to create users are created within the Active Directory server, the kali linux VM attacks and gains access to those user accounts, and to identify and observe those attacks through logs sent to a Splunk server. 
 
-Note: All of the virtual machines used in this project was made using Virtualbox as a hypervisor
+All of the devices within this metwork network were constructed as virtual machines where Virtualbox is the hypervisor used. 
 
 ## Specifications
 
-Note: Adjust depending on what your computer can handle
+Here are the specifications for each virtual machine. If the block is empty, then no specification or app was needed for that category:
+
+||Splunk Server (AD-splunk)|Active Directory Server (AD-server)|Target PC (ADdemo)|Attacking PC (Pre-built Kali-linux VM)|
+|-|-------------------------|-----------------------------------|------------------|--------------------------------------|
+|OS|[Ubuntu 20.04 LTS](https://ubuntu.com/download/server)|[Windows Server 2022](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022)|[Windows 10](https://www.microsoft.com/en-us/software-download/windows10)|[Prebuilt Kali Virtual Machine](https://www.kali.org/get-kali/#kali-virtual-machines)|
+|Memory|8 gbs|4 gbs|6 gbs|2gbs|
+|Storage|Storage: 100 gbs|50 gbs|50 gbs|80.09 gbs|
+|Splunk|Splunk: [Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html)|[Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)|[Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)||
+|Sysmon||[Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)|[Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)||
+|Sysmon Config|| [olafhartong Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)| [olafhartong Sysmon Configuration](https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)||
 
 ### Splunk Server (AD-splunk)
 OS: [Ubuntu 20.04 LTS](https://ubuntu.com/download/server)</p>
@@ -32,7 +36,7 @@ Sysmon Configuration: [olafhartong Sysmon Configuration](https://github.com/olaf
 [Splunk Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)</p>
 
 ### Target PC (ADdemo)
-OS:  [Windows 10](https://www.microsoft.com/en-us/software-download/windows10)</p>
+OS: [Windows 10](https://www.microsoft.com/en-us/software-download/windows10)</p>
 Memory: 6 gbs (6114 mbs)</p>
 Storage: 50 gbs</p>
 Sysmon: [Sysmon monitoring system](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)</p>
@@ -41,11 +45,7 @@ Sysmon Configuration: [olafhartong Sysmon Configuration](https://github.com/olaf
 
 
 ### Attacking PC (Pre-built Kali-linux VM)
-OS: [Kali](https://www.kali.org/get-kali/#kali-virtual-machines)</p>
-Memory: 2 gbs (2048 mbs)</p>
-Storage: 80 gbs</p>
-
-
+[Prebuilt Kali Virtual Machine](https://www.kali.org/get-kali/#kali-virtual-machines)</p>
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## 1. Network Configuration

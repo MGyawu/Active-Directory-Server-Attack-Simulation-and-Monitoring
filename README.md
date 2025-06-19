@@ -181,14 +181,16 @@ I then received a pop-up message stating "Windows could not stop the SplunkForwa
 
 In order to install and configure Active Directory into my AD server, I opened the Service Manager and navigated Manage > Add Roles and Features > Next > Ensured that "Role-Based or feature-based installation" is selected and click Next > Selected AD-server from a list of servers and clicked Next > Active Directory Domain Services > Add Features > Kept on clicking Next until I saw "Install" > Install. Once I saw "Configuration required. Installation Succeeded" under the progress bar, I knew that Active Directory has completed installation.
 
-|![AD-ServerInstallAD1](AD-ServerInstallAD1.png)|![AD-ServerInstallAD2](AD-ServerInstallAD2.png)|![AD-ServerInstallAD3](AD-ServerInstallAD3.png)|
-|------------------------|-------------------------|-------------------------|
+![AD-ServerInstallAD1](AD-ServerInstallAD1.png)
+![AD-ServerInstallAD2](AD-ServerInstallAD2.png)
+![AD-ServerInstallAD3](AD-ServerInstallAD3.png)
 
 
 After closing out from the installation page, I returned to Server Manager and navigated from the Flag icon at the top of the window > Promote this server to a domain controller > Selected "Add a new forest", entered meadbag.local (needed a top level domain) as my Root domain name, and clicked Next > Entered a password and clicked Next > continued to click Next until I saw "Verifying prerequisites for domain > controller operation ..." > Install when it was available. Once the install was finished the server restarted on its own.
 
-|![AD-ServerPromote1](AD-ServerPromote1.png)|![AD-ServerPromote2](AD-ServerPromote2.png)|![AD-ServerPromote3](AD-ServerPromote3.png)|
-|----------------------|----------------------|----------------------|
+![AD-ServerPromote1](AD-ServerPromote1.png)
+![AD-ServerPromote2](AD-ServerPromote2.png)
+![AD-ServerPromote3](AD-ServerPromote3.png)
 
 Once the reboot was finished, I saw that my login screen had MEADBAG\Administrator as the account to log into for the server. Now that I have installed Active Directory on this server, it is time for me to create a new organizational unit and a user that is assigned to that unit. In order to do this, I went back to main page of the Server Manager and navigated from Tools > Active Directory Users and Computers. From here I saw the top level domain(meadbag.local) of the active directory server and a list of all the organizational units within that domain on the left side, and on the right a list of premade groups.
 
@@ -248,13 +250,14 @@ After logging in, I navigated Settings at the top of the screen > Indexes > New 
 
 Now, to enable my Splunk server to receive the data that is sent to endpoint from my machine, I navigated from Settings > Forwarding and receiving > Configure receiving > New Receiving Port > and I entered 9997 into "Listen on this port" (this is the same port that I set as the default port in the Splunk Forwarder) > Save. This brought me to a page titled "Receiving Data" with the port I entered listed.
 
-|![AD-EnterpriseDefaultPort](AD-EnterpriseDefaultPort.png)|![AD-EnterpriseDefaultPortEnabled](AD-EnterpriseDefaultPortEnabled.png)|
-|-----------------------------|------------------------------------|
+![AD-EnterpriseDefaultPort](AD-EnterpriseDefaultPort.png)
+![AD-EnterpriseDefaultPortEnabled](AD-EnterpriseDefaultPortEnabled.png)
 
 In order to see logs from devices, I navigated Apps > Search & Reporting > In the search bar I entered "index=endpoint". This search produces logs from all the devices (the Target PC and the AD Server) forwarding them to the Splunk server I created earlier, and these logs contain information on Application, System, Security, and Sysmon (as defined in inputs.conf).
 
-|![AD-EnterpriseFirstSearch1](AD-EnterpriseFirstSearch1.png)|![AD-EnterpriseFirstSearch2](AD-EnterpriseFirstSearch2.png)|![AD-EnterpriseFirstSearch3](AD-EnterpriseFirstSearch3.png)|
-|------------------------------|------------------------------|------------------------------|
+![AD-EnterpriseFirstSearch1](AD-EnterpriseFirstSearch1.png)
+![AD-EnterpriseFirstSearch2](AD-EnterpriseFirstSearch2.png)
+![AD-EnterpriseFirstSearch3](AD-EnterpriseFirstSearch3.png)
 
 
 

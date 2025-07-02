@@ -325,7 +325,7 @@ After entering the search "index=endpoint jsmith EventCode=4625", I saw that mos
 
 ### Atomic Red Team - Persistence Tactic for an Attack: Create New User in Domain
 
-In order to perform a persistence attack, during which we create a new account to target the Target-PC, as defined by the [Mitre Att&ck framework]((https://attack.mitre.org/)), I logged into my Target PC using the jsmith account, opened the file explorer and navigated This PC > Local Disk (C:) > AtomicRedTeam > atomics > and searched for the folder labeled T1136.001. This file corresponds to the to the MITRE attack type [T1136.001: Create a Local Account](https://attack.mitre.org/techniques/T1136/001/).
+In order to perform a persistence attack, during which we create a new account to target the Target-PC, as defined by the [Mitre Att&ck framework]((https://attack.mitre.org/)), I logged into my Target PC using the jsmith account, opened the file explorer and navigated This PC > Local Disk (C:) > AtomicRedTeam > atomics > and searched for the folder labeled T1136.001. This file corresponds to the to the MITRE ATT&CK identified attack type [T1136.001: Create a Local Account](https://attack.mitre.org/techniques/T1136/001/).
 
 ![AD-SimPersist1](AD-SimPersist1.png)
 
